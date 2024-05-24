@@ -60,24 +60,6 @@ function Pci() {
     }
   }, [attachEvent]);
 
-  // useEffect(() => {
-  //   if(attachEvent){
-  //     console.log("attached event");
-  //     const handleValidateMessageFromPciBooking = (event: any) => {
-  //       // Example: Log the message data
-  //       console.log("DEBUG: ");
-  //       console.log('Received message:', event);
-  //       console.log('Received message:', event.data);
-  //     };
-
-  //     window.addEventListener('message', handleValidateMessageFromPciBooking);
-
-  //     return () => {
-  //       window.removeEventListener('message', handleValidateMessageFromPciBooking);
-  //     };
-  //   }
-  // }, [attachEvent])
-
   return (
     <>
       <div className="m-2 p-2 text-center" style={{ height: "100vh" }}>
@@ -104,14 +86,16 @@ function Pci() {
         ></Button>
 
         <h1>PCI Demo</h1>
-        <iframe
+        {
+          show &&
+          <iframe
           ref={iframeRef}
           onLoad={onLoadFun}
           width="100%"
           height="100%"
           src={iframeUrl}
           title="Get Token"
-        ></iframe>
+        ></iframe>}
 
         <Button className="m-2" label="Validate" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("validate", 'https://service.pcibooking.net/')}}></Button>
         <Button className="m-2" label="Submit" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("submit", 'https://service.pcibooking.net/')}}></Button>
