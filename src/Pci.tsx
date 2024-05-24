@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { IframeHTMLAttributes, useRef } from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
@@ -10,7 +10,7 @@ function Pci() {
   const [iframeUrl, setIframeUrl] = useState<string>("");
   const [attachEvent, setAttachEvent] = useState<boolean>(false);
 
-  const iframeRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const onLoadFun = (params: any) => {
     // params.target?.postMessage("validate", ()=>{console.log("validation");
@@ -113,10 +113,8 @@ function Pci() {
           title="Get Token"
         ></iframe>
 
-        {//@ts-ignore
-        <Button className="m-2" label="Validate" onClick={()=>{iframeRef?.current?.contentWindow.postMessage("validate", 'https://service.pcibooking.net/')}}></Button>}
-        {//@ts-ignore
-        <Button className="m-2" label="Submit" onClick={()=>{iframeRef?.current?.contentWindow.postMessage("submit", 'https://service.pcibooking.net/')}}></Button>}
+        <Button className="m-2" label="Validate" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("validate", 'https://service.pcibooking.net/')}}></Button>
+        <Button className="m-2" label="Submit" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("submit", 'https://service.pcibooking.net/')}}></Button>
       </div>
     </>
   );
