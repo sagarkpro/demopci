@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'primereact/resources/themes/saga-purple/theme.css';
+import '/node_modules/primeflex/primeflex.css'
+import { BrowserRouter } from 'react-router-dom';
+import Routing from './Routing';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routing></Routing>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
