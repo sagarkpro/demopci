@@ -63,27 +63,35 @@ function Pci() {
   return (
     <>
       <div className="m-2 p-2 text-center" style={{ height: "100vh" }}>
-        <InputText
-          value={iframeUrl}
-          className="m-1"
-          onChange={(e) => setIframeUrl(e.target.value)}
-        ></InputText>
+        <div className="grid">
+          <div className="col-10">
+            <InputText
+            placeholder="Entrer iframe URL"
+            style={{width:"100%"}}
+            value={iframeUrl}
+            className="m-1"
+            onChange={(e) => setIframeUrl(e.target.value)}
+          ></InputText>
+          </div>
+          <div className="col-2">
+            <Button
+              label="Hit"
+              className="m-1"
+              onClick={() => {
+                setShow(true);
+              }}
+            ></Button>
+            <Button
+              label="Attach Event"
+              className="m-1"
+              onClick={() => {
+                setAttachEvent((prev)=>!prev);
+              }}
+            ></Button>
+          </div>
+        </div>
 
-        <Button
-          label="Hit"
-          className="m-1"
-          onClick={() => {
-            setShow(true);
-          }}
-        ></Button>
-
-        <Button
-          label="Attach Event"
-          className="m-1"
-          onClick={() => {
-            setAttachEvent((prev)=>!prev);
-          }}
-        ></Button>
+        
 
         <h1>PCI Demo</h1>
         {
@@ -105,3 +113,4 @@ function Pci() {
 }
 
 export default Pci;
+// https://service.pcibooking.net/api/payments/capturecard?sessionToken=4bb5c71cc9734f59864e00c2eeda8c91&brand=PCIB&cvv=True&autoDetectCardType=True&showOwnerId=False&submitWithPostMessage=true&Success=http://localhost:3000/?cardToken=%7BcardToken%7D
