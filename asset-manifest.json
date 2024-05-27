@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/demopci/static/css/main.fb97da5b.css",
-    "main.js": "/demopci/static/js/main.8f16afc7.js",
+    "main.js": "/demopci/static/js/main.92a7828b.js",
     "static/js/453.be9c9ee5.chunk.js": "/demopci/static/js/453.be9c9ee5.chunk.js",
     "index.html": "/demopci/index.html",
     "main.fb97da5b.css.map": "/demopci/static/css/main.fb97da5b.css.map",
-    "main.8f16afc7.js.map": "/demopci/static/js/main.8f16afc7.js.map",
+    "main.92a7828b.js.map": "/demopci/static/js/main.92a7828b.js.map",
     "453.be9c9ee5.chunk.js.map": "/demopci/static/js/453.be9c9ee5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fb97da5b.css",
-    "static/js/main.8f16afc7.js"
+    "static/js/main.92a7828b.js"
   ]
 }
