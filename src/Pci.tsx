@@ -1,11 +1,19 @@
-import React, { IframeHTMLAttributes, useRef } from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { useParams } from "react-router-dom";
+import { InputTextarea } from 'primereact/inputtextarea';
+
+interface IframeResp{
+  sessionId: string,
+  url: string,
+  iFrameUrl: string
+}
 
 function Pci() {
+  const [iFrameResp, setIframeResp] = useState<IframeResp>();
+  const [accountId, setAccountId] = useState<string>("zentrum-demo-account");
   const [show, setShow] = useState<boolean>(false);
   const [iframeUrl, setIframeUrl] = useState<string>("");
   const [attachEvent, setAttachEvent] = useState<boolean>(false);
@@ -39,6 +47,24 @@ function Pci() {
     };
   };
 
+  const getIframeURL = async()=>{
+    try{
+      const resp = await axios.get('https://dev.api.zentrumhub.com/api/hotel/book/pci/getToken/', {headers:{accountId: accountId}});
+      if(resp.status === 200){
+        let iframe: IframeResp = {
+          url: resp.data.url,
+          sessionId: resp.data.sessionId,
+          iFrameUrl: resp.data.iFrameUrl
+        }
+        setIframeResp(iframe);
+      }
+    }
+    catch(ex){
+      console.log("ERROR fetching iframe");
+      console.log(ex);
+    }
+  }
+
   useEffect(() => {
     const handleValidateMessageFromPciBooking = (event: any) => {
       // Example: Log the message data
@@ -64,31 +90,45 @@ function Pci() {
     <>
       <div className="m-2 p-2 text-center" style={{ height: "100vh" }}>
         <div className="grid">
-          <div className="col-10">
-            <InputText
-            placeholder="Entrer iframe URL"
-            style={{width:"100%"}}
-            value={iframeUrl}
-            className="m-1"
-            onChange={(e) => setIframeUrl(e.target.value)}
-          ></InputText>
-          </div>
-          <div className="col-2">
-            <Button
-              label="Hit"
+          
+            <div className="col-6 text-right">
+              <InputText placeholder="Enter AccountId" value={accountId} onChange={(e)=>{setAccountId(e.target.value)}}></InputText>
+            </div>
+            <div className="col-6 text-left">
+              <Button label="Get Iframe URL" onClick={getIframeURL}></Button>
+            </div>
+          
+            <div className="col-12 text-center">
+            <h3>iFrameUrl: <a href={iFrameResp?.iFrameUrl}>{iFrameResp?.iFrameUrl}</a></h3>
+              <h3>PCI URL: <a href={iFrameResp?.url}>{iFrameResp?.url}</a></h3>
+              <h3>SessionId: <a href={iFrameResp?.sessionId}>{iFrameResp?.sessionId}</a></h3>
+            </div>
+          
+            <div className="col-10">
+              <InputText
+              placeholder="Entrer iframe URL"
+              style={{width:"100%"}}
+              value={iframeUrl}
               className="m-1"
-              onClick={() => {
-                setShow(true);
-              }}
-            ></Button>
-            <Button
-              label="Attach Event"
-              className="m-1"
-              onClick={() => {
-                setAttachEvent((prev)=>!prev);
-              }}
-            ></Button>
-          </div>
+              onChange={(e) => setIframeUrl(e.target.value)}
+            ></InputText>
+            </div>
+            <div className="col-2">
+              <Button
+                label="Hit"
+                className="m-1"
+                onClick={() => {
+                  setShow(true);
+                }}
+              ></Button>
+              <Button
+                label="Attach Event"
+                className="m-1"
+                onClick={() => {
+                  setAttachEvent((prev)=>!prev);
+                }}
+              ></Button>
+            </div>
         </div>
 
         
