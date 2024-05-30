@@ -137,6 +137,7 @@ function Pci() {
         {
           show &&
           <iframe
+          className="p-2"
           ref={iframeRef}
           onLoad={onLoadFun}
           width="100%"
@@ -145,8 +146,8 @@ function Pci() {
           title="Get Token"
         ></iframe>}
 
-        <Button className="m-2" label="Validate" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("validate", 'https://service.pcibooking.net/')}}></Button>
-        <Button className="m-2" label="Submit" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("submit", 'https://service.pcibooking.net/')}}></Button>
+        <Button className="m-2" label="Validate" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("validate", "https://pci.channex.io")}}></Button>
+        <Button className="m-2" label="Submit" onClick={()=>{iframeRef?.current?.contentWindow?.postMessage("submit", "https://pci.channex.io")}}></Button>
       </div>
     </>
   );
