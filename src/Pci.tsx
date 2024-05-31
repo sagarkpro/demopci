@@ -17,6 +17,7 @@ function Pci() {
   const [show, setShow] = useState<boolean>(false);
   const [iframeUrl, setIframeUrl] = useState<string>("");
   const [attachEvent, setAttachEvent] = useState<boolean>(false);
+  const [cardToken, setCardToken] = useState<string>("");
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -33,6 +34,7 @@ function Pci() {
       console.log("DEBUG: ");
       console.log("Received message:", event);
       console.log("Received message:", event.data);
+      setCardToken(event.data.card.card_token);
     };
 
     window.addEventListener("message", handleValidateMessageFromPciBooking);
@@ -102,6 +104,7 @@ function Pci() {
             <h3>iFrameUrl: <a href={iFrameResp?.iFrameUrl}>{iFrameResp?.iFrameUrl}</a></h3>
               <h3>PCI URL: <a href={iFrameResp?.url}>{iFrameResp?.url}</a></h3>
               <h3>SessionId: <a href={iFrameResp?.sessionId}>{iFrameResp?.sessionId}</a></h3>
+              <h3>cardToken: {cardToken}</h3>
             </div>
           
             <div className="col-10">
