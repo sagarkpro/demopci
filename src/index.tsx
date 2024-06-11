@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'primereact/resources/themes/saga-purple/theme.css';
+import 'primereact/resources/themes/mdc-dark-deeppurple/theme.css';
+//import 'primereact/resources/themes/vela-purple/theme.css';
+//import 'primereact/resources/themes/arya-purple/theme.css';
 import '/node_modules/primeflex/primeflex.css'
 import { BrowserRouter } from 'react-router-dom';
 import Routing from './Routing';
@@ -13,7 +15,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App></App>
+    <BrowserRouter>
+      <Routing></Routing>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
